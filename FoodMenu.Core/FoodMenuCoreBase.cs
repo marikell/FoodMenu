@@ -9,29 +9,29 @@ namespace FoodMenu.Core
 {
     public class FoodMenuCoreBase<TEntity>: IDisposable where TEntity:class,new()
     {
-        protected readonly FoodMenuRepositoryBase<TEntity> Repository;
+        protected readonly FoodMenuRepositoryBase<TEntity> FRepository;
        
         public virtual void Create(TEntity AEntity)
         {
-            Repository.Add(AEntity);
-            Repository.Save();
+            FRepository.Add(AEntity);
+            FRepository.Save();
         }
 
         public virtual void Edit(TEntity AEntity)
         {
-            Repository.Edit(AEntity);
-            Repository.Save();
+            FRepository.Edit(AEntity);
+            FRepository.Save();
         }
 
         public virtual void Delete(int id)
         {
-            Repository.Delete(Repository.Get(id));
-            Repository.Save();
+            FRepository.Delete(FRepository.Get(id));
+            FRepository.Save();
         }
 
         public void Dispose()
         {
-            Repository.Dispose();
+            FRepository.Dispose();
         }
     }
 }

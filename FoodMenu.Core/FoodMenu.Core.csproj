@@ -42,11 +42,16 @@
   <ItemGroup>
     <Compile Include="FoodMenuCoreBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RestaurantCore.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FoodMenu.Data\FoodMenu.Data.csproj">
       <Project>{7a341fae-c7be-49bd-80c0-5ee01426c183}</Project>
       <Name>FoodMenu.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FoodMenu.Models\FoodMenu.Models.csproj">
+      <Project>{172e604d-3828-4162-8531-55817648810d}</Project>
+      <Name>FoodMenu.Models</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
