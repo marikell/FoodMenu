@@ -142,6 +142,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\FoodMenuControllerBase.cs" />
+    <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\RestaurantController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -155,6 +156,7 @@
     </Content>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\images\fork.png" />
     <Content Include="Content\images\icone2.png" />
     <Content Include="Content\images\restaurant-menu-icon-png-28.png" />
     <Content Include="favicon.ico" />
@@ -189,6 +191,12 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Restaurant\Index.cshtml" />
+    <Content Include="Views\Restaurant\Register.cshtml" />
+    <Content Include="Views\Restaurant\Home.cshtml" />
+    <Content Include="Views\Restaurant\Restaurant.cshtml" />
+    <Content Include="Views\Menu\Index.cshtml" />
+    <Content Include="Views\Menu\Menu.cshtml" />
+    <Content Include="Views\Menu\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />

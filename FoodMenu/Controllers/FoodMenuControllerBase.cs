@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 namespace FoodMenu.Controllers
 {
-    public class FoodMenuControllerBase<TEntity>: Controller where TEntity: class, new()
+    public class FoodMenuControllerBase<TEntity> : Controller where TEntity : class, new()
     {
         protected readonly FoodMenuCoreBase<TEntity> Core;
 
@@ -21,9 +21,10 @@ namespace FoodMenu.Controllers
             return View();
         }
 
-        public virtual ActionResult Create()
+        public ActionResult Create()
         {
             return View();
         }
     }
+
 }

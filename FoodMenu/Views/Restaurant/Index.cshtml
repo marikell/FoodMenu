@@ -1,4 +1,69 @@
 ﻿@{
     ViewBag.Title = "FoodMenu (Home)";
+    Layout = null;
 }
+<head>
+    <style>
+        .title {
+            font-weight: bold;
+            color: rgb(151, 0, 65);
+        }
+        .list-group-item {
+            color: rgb(151, 0, 65);
+            font-weight:bold;
+            font-size:30px;
+        }
+    </style>
+</head>
 
+@Styles.Render("~/Content/css")
+@Scripts.Render("~/bundles/modernizr")
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+
+
+<center><h1 class="title">Restaurantes</h1></center>
+<hr />
+<br />
+<div class="col-md-12" style="height:50vh; width:100vw;">
+    <div id="listRestaurants" class="list-group">
+        @*<a href="#" class="list-group-item">First item</a>
+        <a href="#" class="list-group-item">Second item</a>
+        <a href="#" class="list-group-item">Third item</a>*@
+    </div>
+</div>
+
+<script>
+
+    $(document).ready(function () {
+
+
+        $.ajax({
+            url: '@Url.Action("GetAllRestaurants", "Restaurant")',
+            data: {
+
+            },
+            error: function () {
+
+            },
+            dataType: 'json',
+            success: function (list) {
+
+                var array = [];
+                array.push(list);
+                var lista = array[0];
+
+                for (var i = 0; i < lista.length; i++) {
+
+                    var url = '@Url.Action("Restaurant", "Restaurant")' + "?id=" + lista[i].IdRestaurant;
+                    var restaurantLine = "<a href='"+ url+ "' id='" + lista[i].IdRestaurant + "' data-id='" + lista[i].IdRestaurant + "' class='list-group-item'>" + lista[i].NamRestaurant + "</a>";
+                    $("#listRestaurants").append(restaurantLine);
+                }
+
+            },
+            type: 'GET'
+        });
+
+    });
+
+</script>

@@ -64,9 +64,16 @@
     <Compile Include="Mappings\MenuItemMap.cs" />
     <Compile Include="Mappings\MenuMap.cs" />
     <Compile Include="Mappings\RestaurantMap.cs" />
+    <Compile Include="MenuHeaderRepository.cs" />
+    <Compile Include="MenuItemRepository.cs" />
+    <Compile Include="MenuRepository.cs" />
     <Compile Include="Migrations\201711101704150_Initial.cs" />
     <Compile Include="Migrations\201711101704150_Initial.Designer.cs">
       <DependentUpon>201711101704150_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711111558573_ModelModifications.cs" />
+    <Compile Include="Migrations\201711111558573_ModelModifications.Designer.cs">
+      <DependentUpon>201711111558573_ModelModifications.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -79,6 +86,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201711101704150_Initial.resx">
       <DependentUpon>201711101704150_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711111558573_ModelModifications.resx">
+      <DependentUpon>201711111558573_ModelModifications.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

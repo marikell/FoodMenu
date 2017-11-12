@@ -9,7 +9,7 @@ namespace FoodMenu.Core
 {
     public class FoodMenuCoreBase<TEntity>: IDisposable where TEntity:class,new()
     {
-        protected readonly FoodMenuRepositoryBase<TEntity> FRepository;
+        protected FoodMenuRepositoryBase<TEntity> FRepository;
        
         public virtual void Create(TEntity AEntity)
         {

@@ -34,17 +34,12 @@
     <nav class="navbar">
         <div class="fontChange container-fluid">
             <div class="navbar-header">
-                <img style="width:7vh; height:7vh;" src="~/Content/images/icone2.png" />
+                @*<img style="width:7vh; height:7vh;" src="~/Content/images/icone2.png" />*@
                 <a class="navbar-brand" href="#">FOODMENU</a>
             </div>
-            <ul class="nav navbar-nav" style="height: 100%;">
-                <li><a href="#">Restaurante</a></li>
-              
-                <li><a href="#">Cardápios</a></li>
-            </ul>
+
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                <li><a href="@Url.Action("Home", "Restaurant")"><span class="glyphicon glyphicon-home"></span> Voltar para Home</a></li>
             </ul>
         </div>
     </nav>
