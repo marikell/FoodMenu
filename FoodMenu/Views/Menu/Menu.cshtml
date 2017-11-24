@@ -1,48 +1,102 @@
-﻿<head>
+﻿@model FoodMenu.Models.Menu
+@{
+    ViewBag.Title = "Code";
+}
+<br><br>
+@Scripts.Render("~/bundles/jquery")
+<style>
+    .codeblockHeader {
+        background-color: rgb(151, 0, 65);
+        border-radius: 20px;
+        cursor: pointer;
+        /*width: 50vw;*/
+        height: 5vh;
+        line-height: 5vh;
+        font-size: 1.5em;
+        font-weight: bold;
+    }
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>jQuery UI Draggable + Sortable</title>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="/resources/demos/style.css">
-    <style>
-        ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            margin-bottom: 10px;
+    .codeblock {
+        background-color: orange;
+        border-radius: 20px;
+        cursor: pointer;
+        /*width: 50vw;*/
+        height: 5vh;
+        line-height: 5vh;
+        font-size: 1.5em;
+        font-weight: bold;
+    }
+
+    .title {
+        border-radius: 20px;
+        background-color: rgb(151, 0, 65);
+    }
+
+    h2 {
+        color: white;
+        font-weight: bold;
+        margin-left: 5%;
+    }
+
+    .module {
+        width: 320px;
+        border: 1px solid silver;
+        color: white;
+        text-align: center;
+        transition: color 0.3s, background-color 0.3s;
+    }
+
+        .module:hover {
+            background: #ffffff;
+            color: black;
         }
 
-        li {
-            margin: 5px;
-            padding: 5px;
-            width: 150px;
+        .module:active {
+            box-shadow: 0px 0px 50px gray;
+            -webkit-transform: scale(1.05);
+            -webkit-transform-origin: -30 100%;
+            -webkit-transform: rotate(-3deg);
         }
-    </style>
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script>
-  $( function() {
-    $( "#sortable" ).sortable({
-      revert: true
-    });
-    $( "#draggable" ).draggable({
-      connectToSortable: "#sortable",
-      helper: "clone",
-      revert: "invalid"
-    });
-    $( "ul, li" ).disableSelection();
-  } );
-    </script>
 
+    .idented {
+        margin-left: 10%;
+    }
+</style>
 
-</head>
+<div class="title row">
+    <h2>1. Dados do Cardápio</h2>
+</div>
 
+<br />
+<br />
+<div class="form-group">
+    @Html.LabelFor(model => model.NamMenu, htmlAttributes: new { @class = "control-label col-md-1" })
+    <div class="col-md-11">
+        @Html.EditorFor(model => model.NamMenu, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.NamMenu, "", new { @class = "text-danger" })
+    </div>
+</div>
+<br />
+<br />
+<div class="form-group">
+    @Html.LabelFor(model => model.DesMenu, htmlAttributes: new { @class = "control-label col-md-1" })
+    <div class="col-md-11">
+        @Html.EditorFor(model => model.DesMenu, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.DesMenu, "", new { @class = "text-danger" })
+    </div>
+</div>
+<br />
+<br />
+@*<div class="form-group">
+    <button class="btn btn-default" data-toggle="modal" data-target="#AddHeaderMenu">ADICIONAR CABEÇALHO</button>
+    <button class="btn btn-default" data-toggle="modal" data-target="#AddMenuItem">ADICIONAR ITEM</button>
+</div>*@
 
-<ul id="sortable">
-    <li class="ui-state-default">Item 1</li>
-    <li class="ui-state-default">Item 2</li>
-    <li class="ui-state-default">Item 3</li>
-    <li class="ui-state-default">Item 4</li>
-    <li class="ui-state-default">Item 5</li>
-</ul>
+<div class="form-group">
+    <button class="btn btn-default" data-toggle="modal" data-target="#AddHeaderMenu">ADICIONAR CABEÇALHO</button>
+</div>
+
+<script>
+   
+
+</script>

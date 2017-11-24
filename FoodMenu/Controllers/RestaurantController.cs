@@ -62,7 +62,9 @@ namespace FoodMenu.Controllers
 
         public ActionResult GetAllRestaurants()
         {
-            return Json(Core.GetAllRestaurants(), JsonRequestBehavior.AllowGet);
+            ICollection<Restaurant> Restaurants = Core.GetAllRestaurants();
+
+            return Json(Restaurants.Select(u=> new Restaurant { IdRestaurant = u.IdRestaurant, NamRestaurant = u.NamRestaurant, Menus = u.Menus.Select(g => new Menu { IdMenu = g.IdMenu, NamMenu = g.NamMenu}).ToList()}), JsonRequestBehavior.AllowGet);
         }
 
 

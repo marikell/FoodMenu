@@ -16,11 +16,37 @@ namespace FoodMenu.Core
         {
             Repository = new MenuRepository();
         }
-        
+
+        public void CreateMenu(Menu Menu)
+        {
+            Repository.CreateMenu(Menu);
+        }
+
+        public ICollection<Menu> GetMenusByRestaurant(int IDRestaurant)
+        {
+
+            return Repository.GetMenusByRestaurant(IDRestaurant);
+        }
+
+        public void AddMenuHeader(MenuHeader MenuHeader)
+        {
+            Repository.AddMenuHeader(MenuHeader);
+        }
+
+        public void AddMenuItem(MenuItem MenuItem)
+        {
+            Repository.AddMenuItem(MenuItem);
+        }
         public Restaurant GetRestaurantById(int id)
         {
             return Repository.GetRestaurantById(id);
         }
 
-    }
+        public Menu GetMenuById(int id)
+        {
+            return Repository.GetMenuById(id);
+        }
+
+
+ }
 }

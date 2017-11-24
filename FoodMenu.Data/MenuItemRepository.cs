@@ -9,6 +9,17 @@ namespace FoodMenu.Data
 {
     public class MenuItemRepository: FoodMenuRepositoryBase<MenuItem>
     {
+        protected FoodMenuContext Context;
 
+        public MenuItemRepository()
+        {
+            Context = new FoodMenuContext();
+        }
+
+        public static void AddMenuItem(FoodMenuContext Context, MenuItem MenuItem)
+        {
+            Context.MenuItems.Add(MenuItem);
+            Context.SaveChanges();
+        }
     }
 }
