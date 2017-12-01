@@ -38,7 +38,6 @@
 
 </div>
 
-@*ocation.href='@Url.Action("Create", "Menu")' + '?id=@Model.IdRestaurant'*@
 <div class="modal fade" id="NewMenu" role="dialog">
     <div class="modal-dialog">
 
@@ -74,6 +73,10 @@
 
 
             </div>
+
+
+            <br />
+            <br />
         </div>
 
     </div>
@@ -83,6 +86,8 @@
 <script>
 
     function fillGrid() {
+
+        $("#listMenus").empty();
 
               $.ajax({
             url: '@Url.Action("GetMenusByRestaurant", "Menu")',
@@ -139,11 +144,12 @@
             },
             dataType: 'json',
             success: function () {
-                fillGrid();
 
             },
             type: 'POST'
         });
+
+        fillGrid();
 
     }
 </script>

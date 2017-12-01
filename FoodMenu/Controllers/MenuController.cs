@@ -3,6 +3,7 @@ using FoodMenu.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -22,23 +23,23 @@ namespace FoodMenu.Controllers
             return RedirectToAction("Menu", "Menu", new { IDRestaurant = id });
         }
 
-        public ActionResult Menu(int IDRestaurant)
+        public ActionResult Menu(int id)
         {
-            Menu Menu = new Menu { IdRestaurant = IDRestaurant };
-            return View(Menu);
+            Menu Menu = Core.GetMenuById(id);
+            return View("Menu", Menu);
         }
 
         public ActionResult GetMenusByRestaurant(int IDRestaurant)
         {
             ICollection<Menu> Menus = Core.GetMenusByRestaurant(IDRestaurant);
-            return Json(Menus.Select(u => new Menu { IdMenu = u.IdMenu, NamMenu = u.NamMenu, DesMenu = u.DesMenu }).ToList(), JsonRequestBehavior.AllowGet);
+            return Json(Menus.Select(u => new Menu { IdMenu = u.IdMenu, NamMenu = u.NamMenu, DesMenu = u.DesMenu, IdRestaurant = u.IdRestaurant }).ToList(), JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
         public ActionResult CreateMenu(Menu Menu)
         {
             Core.CreateMenu(Menu);
-            return View("Index","Menu", Core.GetRestaurantById(Menu.IdRestaurant));
+            return new HttpStatusCodeResult(HttpStatusCode.OK); 
         }
 
         public ActionResult AddMenuItem(MenuItem MenuItem, int IDRestaurant)
@@ -48,12 +49,29 @@ namespace FoodMenu.Controllers
             return RedirectToAction("Index", "Menu");
         }
 
+        public ActionResult GetHeadersOfMenu(int IDMenu)
+        {
+            Menu Menu = Core.GetMenuById(IDMenu);
+            Menu.MenuHeaders = Menu.MenuHeaders.Select(u => new MenuHeader {IdMenu = u.IdMenu, DesMenuHeader = u.DesMenuHeader,
+            NamMenuHeader = u.NamMenuHeader, IdMenuHeader = u.IdMenuHeader, MenuItems = u.MenuItems.Select(v => new MenuItem {IdMenuItem = v.IdMenuItem,
+            DesMenuItem = v.DesMenuItem, IdMenuHeader = v.IdMenuHeader, Price = v.Price, NamMenuItem = v.NamMenuItem, NumSequence = v.NumSequence}).ToList()}).ToList();
 
-        public ActionResult AddMenuHeader(MenuHeader MenuHeader, int IDRestaurant)
+            foreach (var item in Menu.MenuHeaders)
             {
+                
+                item.MenuItems = item.MenuItems.OrderBy(u => u.NumSequence).ToList();
+            }
 
+            return Json(Menu.MenuHeaders, JsonRequestBehavior.AllowGet);
+
+        }
+
+        public ActionResult AddMenuHeader(MenuHeader MenuHeader, int IDRestaurant, int IDMenu)
+        {
+            MenuHeader.IdMenu = IDMenu;
             Core.AddMenuHeader(MenuHeader);
-            return RedirectToAction("Index", "Menu");
+        
+            return RedirectToAction("Menu", "Menu", IDMenu);
         }
 
         public ActionResult Index(int id)
@@ -63,12 +81,7 @@ namespace FoodMenu.Controllers
             return View(Restaurant);
         }
 
-        //public ActionResult GetMenusByRestaurant(int id)
-        //{
-        //    Restaurant Restaurant = Core.GetRestaurantById(id);
-        //    return Json(Restaurant.Menus, JsonRequestBehavior.AllowGet);
-
-        //}
+     
 
     }
 }
