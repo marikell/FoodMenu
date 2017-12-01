@@ -3,48 +3,30 @@
 }
 
 @Styles.Render("~/Content/css")
+@Styles.Render("~/Content/food_menu.css")
 @Scripts.Render("~/bundles/modernizr")
 @Scripts.Render("~/bundles/jquery")
 @Scripts.Render("~/bundles/bootstrap")
 
-<style>
+<div class="container">
+    <div class="centro">
+        <div class="row text-center">
+            <img style="width:120px; height:120px;" src="~/Content/images/fork.png" />
+            <h1>Food Menu</h1>
+            <h2 class="text-center"><small>Crie e gerencie os cardápios de seus restaurantes.</small></h2>
+        </div>
 
-    button {
-        color: white;
-        background-color: rgb(151, 0, 65);
-        border-radius:20px;
-        font-size:60px;
-    }
-    h1 {
-        color: rgb(151, 0, 65);
-        font-weight: bold;
-    }
-
-</style>
-<br />
-<br />
-
-<center><h1>FoodMenu</h1></center>
-<center><img style="width:150px; height:150px;" src="~/Content/images/fork.png" /></center>
-<hr />
-<br />
-<br />
-
-<div class="row">
-    <div class="col-md-6">
-    <button type="button" style="margin-left:40%;" onclick="location.href='@Url.Action("Register", "Restaurant")'">Registrar</button>
-
-    </div>
-
-    <div class="col-md-6">
-        <button type="button" onclick="location.href='@Url.Action("Index", "Restaurant")'">Escolher Restaurante</button>
-
-    </div>
-
+        <div class="row">
+            <div class="col-md-6">
+                <button type="button" class="btn btn-success pull-right btn-lg" onclick="location.href='@Url.Action("Register", "Restaurant")'">
+                    <span class="glyphicon glyphicon-plus"></span> Cadastrar Restaurante
+                </button>
+            </div>
+            <div class="col-md-6">
+                <button type="button" class="btn btn-success pull-left btn-lg" onclick="location.href='@Url.Action("Index", "Restaurant")'">
+                    <span class="glyphicon glyphicon-th-list"></span> Listar Restaurantes
+                </button>
+            </div>
+        </div>
+    </div>    
 </div>
-
-<script>
-
-
-
-</script>

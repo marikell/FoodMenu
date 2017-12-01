@@ -20,24 +20,25 @@
 @Scripts.Render("~/bundles/modernizr")
 @Scripts.Render("~/bundles/jquery")
 @Scripts.Render("~/bundles/bootstrap")
+@Styles.Render("~/Content/food_menu.css")
 
-
-<center><h1 class="title">Restaurantes</h1></center>
-<hr />
-<br />
-<div class="col-md-12" style="height:50vh; width:100vw;">
-    <div id="listRestaurants" class="list-group">
-        @*<a href="#" class="list-group-item">First item</a>
-        <a href="#" class="list-group-item">Second item</a>
-        <a href="#" class="list-group-item">Third item</a>*@
+<div class="container">
+    <div class="centro centro-lista">
+        <h1 class="title text-center">Restaurantes</h1>
+        <h2 class="text-center"><small>Clique em um restaurante para visualizar e editar.</small></h2>
+        <div class="row">
+            <div class="col-md-12" style="height:50vh; width:100vw;">
+                <div id="listRestaurants" class="list-group">
+                    @*<a href="#" class="list-group-item">First item</a>
+                    <a href="#" class="list-group-item">Second item</a>
+                    <a href="#" class="list-group-item">Third item</a>*@
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-
 <script>
-
     $(document).ready(function () {
-
-
         $.ajax({
             url: '@Url.Action("GetAllRestaurants", "Restaurant")',
             data: {
@@ -65,5 +66,4 @@
         });
 
     });
-
 </script>
