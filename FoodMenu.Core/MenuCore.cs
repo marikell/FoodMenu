@@ -22,11 +22,6 @@ namespace FoodMenu.Core
             Repository.CreateMenu(Menu);
         }
 
-        public MenuHeader GetMenuHeaderById(int IDMenuHeader)
-        {
-            return Repository.GetMenuHeaderById(IDMenuHeader);
-        }
-
         public ICollection<Menu> GetMenusByRestaurant(int IDRestaurant)
         {
 

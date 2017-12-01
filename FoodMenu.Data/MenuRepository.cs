@@ -20,11 +20,6 @@ namespace FoodMenu.Data
             return RestaurantRepository.GetRestaurantById(Context, id);
         }
 
-        public MenuHeader GetMenuHeaderById(int IDHeader)
-        {
-            return MenuHeaderRepository.GetMenuHeaderById(Context, IDHeader);
-        }
-
         public ICollection<Menu> GetMenusByRestaurant(int IDRestaurant)
         {
             return Context.Menus.Where(u => u.IdRestaurant == IDRestaurant).ToList();
