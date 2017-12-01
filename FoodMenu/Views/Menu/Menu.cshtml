@@ -153,6 +153,11 @@
                     @Html.TextBox("txtPreco", "", "", new { @class = "form-control", @type = "number" })
                 </div>
 
+                @Html.Label("", "Sequencia: ", new { @class = "col-md-4" })
+                <div class="col-md-8">
+                    @Html.TextBox("txtValSeq", "", "", new { @class = "form-control", @type = "number" })
+                </div>
+
                 <br />
                 <br />
                 <br />
@@ -257,13 +262,14 @@
 
                     var lineHeader = "<ul class='header-row list-group' id='" + lista[i].IdMenuHeader + "''><li class='list-group-item'><b>" + lista[i].NamMenuHeader + "</b><button class='btn-default' onclick='btnAddItem(this,event)' id='" + lista[i].IdMenuHeader +  "' data-toggle='modal' data-target='#AddMenuItem'>+</button></li>";
 
-                    for (var j = 0; j < lista[0].MenuItems.length; j++) {
+                    for (var j = 0; j < lista[i].MenuItems.length; j++) {
 
-                        lineHeader += "<li class='list-group-item list-group-item-warning'>" + lista[i].MenuItems[j].NamMenuItem + "</li>";
+                        var LMenuitem = lista[i].MenuItems[j].NumSequence + "                                " + lista[i].MenuItems[j].NamMenuItem + "                                R$ " + lista[i].MenuItems[j].Price;
+
+                        lineHeader += "<li class='list-group-item list-group-item-warning'>" + LMenuitem + "</li>";
                     }
                     lineHeader += "</ul>";
 
-                    //Para cada Header
                     $("#headers").append(lineHeader);
                     $("#headers").append("<br/>");
                 }
@@ -312,6 +318,7 @@
         var LDesMenuitem = $("#txtDesItem").val();
         var LPrecoItem = $("#txtPreco").val();
         var LIDHeader = $("#idModal").val();
+        var LValSeq = $("#txtValSeq").val();
 
         $.ajax({
             url: '@Url.Action("AddMenuItem", "Menu")',
@@ -320,7 +327,8 @@
                 NamMenuItem: LNamMenuItem,
                 DesMenuItem: LDesMenuitem,
                 Price: LPrecoItem,
-                IDHeader: LIDHeader
+                IDHeader: LIDHeader,
+                NumSequence: LValSeq
 
             },
             error: function () {
@@ -328,7 +336,7 @@
             },
             dataType: 'json',
             success: function () {
-
+                fillHeadersAndItems();
 
             },
             type: 'POST'
