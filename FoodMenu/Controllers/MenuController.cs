@@ -44,7 +44,8 @@ namespace FoodMenu.Controllers
 
         public ActionResult AddMenuItem(MenuItem MenuItem, int IDHeader)
         {
-            MenuItem.IdMenuHeader = IDHeader;
+            MenuHeader MenuHeader = Core.GetMenuHeaderById(IDHeader);
+            MenuItem.MenuHeader = MenuHeader;
             Core.AddMenuItem(MenuItem);
             return new HttpStatusCodeResult(HttpStatusCode.OK);
         }

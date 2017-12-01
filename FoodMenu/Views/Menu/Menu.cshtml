@@ -14,6 +14,10 @@
         font-weight: bold;
     }
 
+    .header-row{
+        background-color: gr;
+    }
+
     .codeblock {
         background-color: orange;
         border-radius: 20px;
@@ -243,15 +247,25 @@
             },
             dataType: 'json',
             success: function (list) {
+                $("#headers").empty();
 
                 var array = [];
                 array.push(list);
                 var lista = array[0];
 
                 for (var i = 0; i < lista.length; i++) {
+
+                    var lineHeader = "<ul class='header-row list-group' id='" + lista[i].IdMenuHeader + "''><li class='list-group-item'><b>" + lista[i].NamMenuHeader + "</b><button class='btn-default' onclick='btnAddItem(this,event)' id='" + lista[i].IdMenuHeader +  "' data-toggle='modal' data-target='#AddMenuItem'>+</button></li>";
+
+                    for (var j = 0; j < lista[0].MenuItems.length; j++) {
+
+                        lineHeader += "<li class='list-group-item list-group-item-warning'>" + lista[i].MenuItems[j].NamMenuItem + "</li>";
+                    }
+                    lineHeader += "</ul>";
+
                     //Para cada Header
-                    var lineHeader = "<div class='blockHeader' onclick='btnAddItem(this,event)'" + "id=" + lista[i].IdMenuHeader + "><h3>" + lista[i].NamMenuHeader + "</h3><button class='btn-default' id='" + lista[i].IdMenuHeader+  "' data-toggle='modal' data-target='#AddMenuItem'>+</button></div><br/>";
                     $("#headers").append(lineHeader);
+                    $("#headers").append("<br/>");
                 }
             },
             type: 'GET'
@@ -281,7 +295,7 @@
             dataType: 'json',
             success: function (object) {
 
-                fillHeadersAndItems();
+              fillHeadersAndItems();
 
             },
             type: 'POST'
@@ -315,7 +329,6 @@
             dataType: 'json',
             success: function () {
 
-                alert("oitudobom");
 
             },
             type: 'POST'
