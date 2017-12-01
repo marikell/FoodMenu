@@ -17,8 +17,7 @@
         .navbar-brand {
             font-size: 30px;
             color: white;
-        }
-
+        }        
         nav {
             background-color: rgb(151, 0, 65);
         }
@@ -29,13 +28,19 @@
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/food_menu.css")
 </head>
-<body style="background-color:white">
+<body style="background-color:white">    
     <nav class="navbar">
         <div class="fontChange container-fluid">
+            <div class="navbar-header">                
+                <a class="navbar-brand" href="@Url.Action("Home", "Restaurant")">FOODMENU</a>
+            </div>
             <div class="navbar-header">
-                @*<img style="width:7vh; height:7vh;" src="~/Content/images/icone2.png" />*@
-                <a class="navbar-brand" href="#">FOODMENU</a>
+                <a class="navbar-brand" href="@Url.Action("Register", "Restaurant")">Cadastrar</a>
+            </div>
+            <div class="navbar-header">
+                <a class="navbar-brand" href="@Url.Action("Index", "Restaurant")">Lista</a>
             </div>
 
             <ul class="nav navbar-nav navbar-right">

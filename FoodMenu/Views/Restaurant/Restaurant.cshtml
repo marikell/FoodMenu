@@ -1,21 +1,22 @@
 ﻿@model FoodMenu.Models.Restaurant
-@Styles.Render("~/Content/food_menu.css")
-<head>
-    
-</head>
+
+@Scripts.Render("~/bundles/jquery")
 
 <div class="container">
     <div class="centro">
-        <h1 class="text-center">Bem vindo, @Model.NamRestaurant</h1>
+        <div class="row text-center">
+            <img style="width:120px; height:120px;" src="~/Content/images/brighty_commerce_12.png" />
+            <h1 class="text-center">Bem vindo, @Model.NamRestaurant</h1>
+        </div>
         <div class="row">
             <div class="col-md-6">
-                <button type="button" style="margin-left:20%;" onclick="onInfoClick()">
+                <button type="button" class="btn btn-success pull-right btn-lg" onclick="onInfoClick()">
                     <span class="glyphicon glyphicon-info-sign"></span> Informações
                 </button>
             </div>
             <div class="col-md-6">
-                <button type="button" style="margin-left:5%;" onclick="onMenusClick()">
-                    <span class="glyphicon glyphicon-clutery"></span> Cardápios
+                <button type="button" class="btn btn-success pull-left btn-lg" onclick="onMenusClick()">
+                    <span class="glyphicon glyphicon-list"></span> Cardápios
                 </button>
             </div>
         </div>

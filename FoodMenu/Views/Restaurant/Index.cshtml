@@ -1,38 +1,16 @@
 ﻿@{
-    ViewBag.Title = "FoodMenu (Home)";
-    Layout = null;
+    ViewBag.Title = "FoodMenu (Home)";    
 }
-<head>
-    <style>
-        .title {
-            font-weight: bold;
-            color: rgb(151, 0, 65);
-        }
-        .list-group-item {
-            color: rgb(151, 0, 65);
-            font-weight:bold;
-            font-size:30px;
-        }
-    </style>
-</head>
 
-@Styles.Render("~/Content/css")
-@Scripts.Render("~/bundles/modernizr")
 @Scripts.Render("~/bundles/jquery")
-@Scripts.Render("~/bundles/bootstrap")
-@Styles.Render("~/Content/food_menu.css")
 
 <div class="container">
     <div class="centro centro-lista">
         <h1 class="title text-center">Restaurantes</h1>
         <h2 class="text-center"><small>Clique em um restaurante para visualizar e editar.</small></h2>
-        <div class="row">
-            <div class="col-md-12" style="height:50vh; width:100vw;">
-                <div id="listRestaurants" class="list-group">
-                    @*<a href="#" class="list-group-item">First item</a>
-                    <a href="#" class="list-group-item">Second item</a>
-                    <a href="#" class="list-group-item">Third item</a>*@
-                </div>
+        <div class="row pre-scrollable">
+            <div class="col-md-12">
+                <div id="listRestaurants" class="list-group"></div>
             </div>
         </div>
     </div>

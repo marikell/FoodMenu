@@ -4,85 +4,54 @@
     ViewBag.Title = "Cardápios";
 }
 
-<head>
-    @Scripts.Render("~/bundles/jquery")
-    <style>
+@Scripts.Render("~/bundles/jquery")
 
-        button {
-            color: white;
-            background-color: rgb(151, 0, 65);
-            border-radius: 20px;
-            font-size: 40px;
-            margin-left:28%;
-        }
-
-        h1 {
-            color: rgb(151, 0, 65);
-            font-weight: bold;
-        }
-
-    </style>
-
-</head>
-
-<center><h1 class="title">Cardápios</h1></center>
-<hr />
-<br />
-<div class="col-md-12" style="height:50vh; width:80vw;">
-    <div id="listMenus" class="list-group">
-        
+<div class="container">
+    <div class="centro centro-lista">
+        <h1 class="title text-center">Cardápios</h1>        
+        <h2 class="text-center"><small>Clique em um cardápio para visualizar e editar.</small></h2>
+        <div class="row">
+            <div class="col-md-12">
+                <button class="btn btn-warning btn-lg pull-right" data-toggle="modal" data-target="#NewMenu">Novo Cardápio</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div id="listMenus" class="list-group pre-scrollable"></div>
+            </div>  
+        </div>
     </div>
-    <hr />
-    <button class="btn btn-default" data-toggle="modal" data-target="#NewMenu">Novo Cardápio</button>
-
-
 </div>
-
 <div class="modal fade" id="NewMenu" role="dialog">
     <div class="modal-dialog">
-
-        <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">Adicionar Cardápio</h4>
             </div>
             <div class="modal-body">
-
-
-                @Html.Label("", "Nome do Cardápio: ", new { @class = "col-md-4" })
-                <div class="col-md-8">
-                    @Html.TextBox("NamMenu", "", "", new { @class = "form-control" })
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        @Html.Label("", "Nome do Cardápio: ", new { @class = "col-md-4" })
+                        <div class="col-md-8">
+                            @Html.TextBox("NamMenu", "", "", new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("", "Descrição do Cardápio: ", new { @class = "col-md-4" })
+                        <div class="col-md-8">
+                            @Html.TextBox("DesMenu", "", "", new { @class = "form-control" })
+                        </div>
+                    </div>
                 </div>
-                <br />
-                <br />
-                <br />
-                @Html.Label("", "Descrição do Cardápio: ", new { @class = "col-md-4" })
-                <div class="col-md-8">
-                    @Html.TextBox("DesMenu", "", "", new { @class = "form-control" })
-                </div>
-
-                <br />
-                <br />
-                <br />
-
             </div>
             <div class="modal-footer">
-                <button id="btnSaveMenu" type="button" onclick="salvarMenu(event)" class="btn btn-default" data-dismiss="modal">Salvar</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-
-
+                <button id="btnSaveMenu" type="button" onclick="salvarMenu(event)" class="btn btn-success" data-dismiss="modal">Salvar</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
             </div>
-
-
-            <br />
-            <br />
         </div>
-
     </div>
 </div>
-
-
 <script>
 
     function fillGrid() {
@@ -117,11 +86,7 @@
     }
 
     $(document).ready(function () {
-
-        fillGrid();
-
-
-
+        fillGrid();        
    });
 
     function salvarMenu(event) {
