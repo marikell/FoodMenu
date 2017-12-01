@@ -42,11 +42,11 @@ namespace FoodMenu.Controllers
             return new HttpStatusCodeResult(HttpStatusCode.OK); 
         }
 
-        public ActionResult AddMenuItem(MenuItem MenuItem, int IDRestaurant)
+        public ActionResult AddMenuItem(MenuItem MenuItem, int IDHeader)
         {
-
+            MenuItem.IdMenuHeader = IDHeader;
             Core.AddMenuItem(MenuItem);
-            return RedirectToAction("Index", "Menu");
+            return new HttpStatusCodeResult(HttpStatusCode.OK);
         }
 
         public ActionResult GetHeadersOfMenu(int IDMenu)
@@ -61,6 +61,7 @@ namespace FoodMenu.Controllers
                 
                 item.MenuItems = item.MenuItems.OrderBy(u => u.NumSequence).ToList();
             }
+
 
             return Json(Menu.MenuHeaders, JsonRequestBehavior.AllowGet);
 

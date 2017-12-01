@@ -83,6 +83,7 @@
     }
 </style>
 
+@Html.Hidden("idModal","");
 <div class="title row">
     <h2>1. Dados do Cardápio</h2>
 </div>
@@ -219,21 +220,21 @@
 
     });
 
+
     function btnAddItem(button,event) {
         event.preventDefault();
-
-        IdModal = $("#button").attr("id");
-
+        var button = $(button);
+        var id = button.attr("id");
+        $("#idModal").val(id);
 
     }
 
     function fillHeadersAndItems() {
-        alert("mari bobona");
         $.ajax({
             url: '@Url.Action("GetHeadersOfMenu", "Menu")',
             data: {
 
-               
+
                 IDMenu: '@Model.IdMenu'
 
             },
@@ -242,19 +243,16 @@
             },
             dataType: 'json',
             success: function (list) {
-                
+
                 var array = [];
                 array.push(list);
                 var lista = array[0];
 
                 for (var i = 0; i < lista.length; i++) {
-
                     //Para cada Header
-                    var lineHeader = "<div class='blockHeader' onclick='btnAddItem(this,event)'" + "id=" + lista[0].IdMenuHeader + "><h3>" + lista[0].NamMenuHeader + "</h3><button class='btn-default' id='" + lista[0].IdMenuHeader+  "' data-toggle='modal' data-target='#AddMenuItem'>+</button></div><br/>";
+                    var lineHeader = "<div class='blockHeader' onclick='btnAddItem(this,event)'" + "id=" + lista[i].IdMenuHeader + "><h3>" + lista[i].NamMenuHeader + "</h3><button class='btn-default' id='" + lista[i].IdMenuHeader+  "' data-toggle='modal' data-target='#AddMenuItem'>+</button></div><br/>";
                     $("#headers").append(lineHeader);
-
                 }
-
             },
             type: 'GET'
         });
@@ -286,9 +284,42 @@
                 fillHeadersAndItems();
 
             },
-            type: 'GET'
+            type: 'POST'
         });
 
+
+    }
+
+    function btnSaveItem_Click(event) {
+
+        event.preventDefault();
+
+        var LNamMenuItem = $("#txtNamItem").val();
+        var LDesMenuitem = $("#txtDesItem").val();
+        var LPrecoItem = $("#txtPreco").val();
+        var LIDHeader = $("#idModal").val();
+
+        $.ajax({
+            url: '@Url.Action("AddMenuItem", "Menu")',
+            data: {
+
+                NamMenuItem: LNamMenuItem,
+                DesMenuItem: LDesMenuitem,
+                Price: LPrecoItem,
+                IDHeader: LIDHeader
+
+            },
+            error: function () {
+
+            },
+            dataType: 'json',
+            success: function () {
+
+                alert("oitudobom");
+
+            },
+            type: 'POST'
+        });
 
     }
 </script>
