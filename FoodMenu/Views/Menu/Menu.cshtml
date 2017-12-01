@@ -4,6 +4,9 @@
 }
 
 @Scripts.Render("~/bundles/jquery")
+
+
+@Html.Hidden("idModal", "")
 <head>
     <script src="~/Scripts/jQueryMask.js"></script>
 </head>
@@ -30,9 +33,9 @@
         <div class="row">
             <button class="btn btn-warning btn-lg pull-right" data-toggle="modal" data-target="#AddHeaderMenu">Adicionar Cabeçalho</button>
         </div>
-        <div class="row pre-scrollable">
+        <div class="row">
             <div class="col-md-12">
-                <div class="list-group" id="headers"></div>
+                <div class="list-group pre-scrollable" id="headers"></div>
             </div>
         </div>
         
@@ -65,6 +68,13 @@
                             @Html.TextBox("txtPreco", "", "", new { @class = "form-control", @type = "number" })
                         </div>
                     </div>
+                    <br />
+                    <div class="form-group">
+                        @Html.Label("", "Sequencia: ", new { @class = "col-md-4" })
+                        <div class="col-md-8">
+                            @Html.TextBox("txtValSeq", "", "", new { @class = "form-control", @type = "number" })
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">
@@ -83,13 +93,19 @@
                 <h4 class="modal-title">Adicionar Cabeçalho</h4>
             </div>
             <div class="modal-body">
-                @Html.Label("", "Nome do Cabeçalho: ", new { @class = "col-md-4" })
-                <div class="col-md-8">
-                    @Html.TextBox("txtNamHeader", "", "", new { @class = "form-control" })
-                </div>
-                @Html.Label("", "Descrição do Cabeçalho: ", new { @class = "col-md-4" })
-                <div class="col-md-8">
-                    @Html.TextBox("txtDesHeader", "", "", new { @class = "form-control" })
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        @Html.Label("", "Nome do Cabeçalho: ", new { @class = "col-md-4" })
+                        <div class="col-md-8">
+                            @Html.TextBox("txtNamHeader", "", "", new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("", "Descrição do Cabeçalho: ", new { @class = "col-md-4" })
+                        <div class="col-md-8">
+                            @Html.TextBox("txtDesHeader", "", "", new { @class = "form-control" })
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">
@@ -103,19 +119,55 @@
     var IdModal = 0;
 
     $(document).ready(function () {
-        fillHeadersAndItems();         
-        //$("#txtPreco").mask("99999-999");         
+        fillHeadersAndItems();        
     });
 
-    function btnAddItem(button,event) {
+    function btnAddItem(button, event) {
         event.preventDefault();
-        IdModal = $("#button").attr("id");
+        var button = $(button);
+        var id = button.attr("id");
+        $("#idModal").val(id);
+
     }
 
-    function fillHeadersAndItems() {        
+    function btnSaveItem_Click(event) {
+
+        event.preventDefault();
+
+        var LNamMenuItem = $("#txtNamItem").val();
+        var LDesMenuitem = $("#txtDesItem").val();
+        var LPrecoItem = $("#txtPreco").val();
+        var LIDHeader = $("#idModal").val();
+        var LValSeq = $("#txtValSeq").val();
+
+        $.ajax({
+            url: '@Url.Action("AddMenuItem", "Menu")',
+            data: {
+
+                NamMenuItem: LNamMenuItem,
+                DesMenuItem: LDesMenuitem,
+                Price: LPrecoItem,
+                IDHeader: LIDHeader,
+                NumSequence: LValSeq
+
+            },
+            error: function () {
+
+            },
+            dataType: 'json',
+            success: function () {
+                fillHeadersAndItems();
+
+            },
+            type: 'POST'
+        });
+
+    }
+
+    function fillHeadersAndItems() {
         $.ajax({
             url: '@Url.Action("GetHeadersOfMenu", "Menu")',
-            data: {                
+            data: {
                 IDMenu: '@Model.IdMenu'
             },
             error: function () {
@@ -128,8 +180,16 @@
                 for (var i = 0; i < lista.length; i++) {
                     //Para cada Header
                     //var lineHeader = "<div onclick='btnAddItem(this,event)'" + "id=" + lista[0].IdMenuHeader + "><h3>" + lista[0].NamMenuHeader + "</h3><button class='btn-default' id='" + lista[0].IdMenuHeader+  "' data-toggle='modal' data-target='#AddMenuItem'>+</button></div><br/>";
-                    var lineHeader = "<a class='list-group-item'>" + lista[0].NamMenuHeader + " <span data-toggle='modal' data-target='#AddMenuItem' onclick='btnAddItem(this,event)' " + "id=" + lista[0].IdMenuHeader + " class='glyphicon glyphicon-plus'><span></a>";
+                    var lineHeader = "<a class='list-group-item'>" + lista[i].NamMenuHeader + " <span data-toggle='modal' data-target='#AddMenuItem' onclick='btnAddItem(this,event)' " + "id=" + lista[0].IdMenuHeader + " class='glyphicon glyphicon-plus'><span></a>";
+                    
+                    for (var j = 0; j < lista[i].MenuItems.length; j++) {
+
+                        var LMenuitem = lista[i].MenuItems[j].NumSequence + " " + lista[i].MenuItems[j].NamMenuItem + " R$ " + lista[i].MenuItems[j].Price;
+
+                        lineHeader += "<li class='list-group-item list-group-item-warning'>" + LMenuitem + "</li>";
+                    }                    
                     $("#headers").append(lineHeader);
+                    //$("#headers").append("<br/>");
                 }
             },
             type: 'GET'
