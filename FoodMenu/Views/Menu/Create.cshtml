@@ -3,6 +3,9 @@
 @{
     Layout = null;
 }
+@Styles.Render("~/Content/food_menu.css")
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")
 
 <!DOCTYPE html>
 
@@ -12,8 +15,7 @@
     <title>Create</title>
 </head>
 <body>
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/jqueryval")
+
     
     
     @using (Html.BeginForm()) 
