@@ -15,5 +15,10 @@ namespace FoodMenu.Data
             Context.SaveChanges();
         }
 
+        public static MenuHeader GetMenuHeaderById(FoodMenuContext Context, int IDHeader)
+        {
+            return Context.MenuHeaders.Where(u => u.IdMenuHeader == IDHeader).FirstOrDefault();
+        }
+
     }
 }
